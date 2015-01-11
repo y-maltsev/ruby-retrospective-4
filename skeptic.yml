@@ -1,0 +1,52 @@
+1:
+  lines_per_method: 5
+  line_length: 80
+  max_nesting_depth: 2
+  methods_per_class: 8
+  no_semicolons: true
+  no_trailing_whitespace: true
+  check_syntax: true
+  no_global_variables: true
+  english_words_for_names: 'fibonacci lucas'
+  naming_conventions: true
+  max_method_arity: 3
+  spaces_around_operators: true
+2:
+  lines_per_method: 8
+  line_length: 80
+  max_nesting_depth: 2
+  methods_per_class: 8
+  no_semicolons: true
+  no_trailing_whitespace: true
+  check_syntax: true
+  no_global_variables: true
+  english_words_for_names: ''
+  naming_conventions: true
+  max_method_arity: 4
+  spaces_around_operators: true
+3:
+  lines_per_method: 8
+  line_length: 80
+  max_nesting_depth: 1
+  methods_per_class: 8
+  no_semicolons: true
+  no_trailing_whitespace: true
+  check_syntax: true
+  no_global_variables: true
+  english_words_for_names: ''
+  naming_conventions: true
+  max_method_arity: 4
+  spaces_around_operators: false
+4:
+  lines_per_method: 5
+  line_length: 80
+  max_nesting_depth: 1
+  methods_per_class: 6
+  no_semicolons: true
+  no_trailing_whitespace: true
+  check_syntax: true
+  no_global_variables: true
+  naming_conventions: true
+  max_method_arity: 3
+  spaces_around_operators: true
+  english_words_for_names: 'upcase downcase'
