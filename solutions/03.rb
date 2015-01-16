@@ -15,7 +15,7 @@ module RBFS
 
     def data_type=(new_type)
       @data_type = new_type
-      case @new_type
+      case new_type
       when :nil then @data = nil
       when :string then @data = @data.to_s
       when :number then @data = @data.to_f
@@ -41,11 +41,11 @@ module RBFS
       case start_data
       when NilClass then @data_type = :nil
       when String then @data_type = :string
-      when Integer || Float then @data_type = :number
+      when Integer, Float then @data_type = :number
       when Symbol then @data_type = :symbol
-      when TrueClass || FalseClass then @data_type = :boolean
+      when TrueClass, FalseClass then @data_type = :boolean
       end
-     end
+    end
   end
 
   class Directory
