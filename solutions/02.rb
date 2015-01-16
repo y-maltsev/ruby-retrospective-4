@@ -1,14 +1,3 @@
-class Proc
-  def &(other)
-    ->( *args) { self[ *args] && other[ *args] }
-  end
-
-  def |(other)
-    ->( *args) { self[ *args] || other[ *args] }
-  end
-end
-
-
 class Filter
   attr :filter
 
@@ -21,22 +10,20 @@ class Filter
   end
 
   def |(other)
-    @filter = @filter | other.filter
-    self
+    Filter.new { |x| call x or other.call x }
   end
 
   def &(other)
-    @filter = @filter & other.filter
-    self
+    Filter.new { |x| call x and other.call x }
   end
 end
 
 class TypeFilter < Filter
   def initialize(type)
     case type
-    when :integer then @filter = ->(x){ x.is_a?(Integer) }
-    when :real then @filter = ->(x){ x.is_a?(Float) || x.is_a?(Rational) }
-    when :complex then @filter = ->(x){ x.is_a?(Complex) }
+    when :integer then super() { |x| x.integer? }
+    when :complex then super() { |x| not x.real? }
+    when :real    then super() { |x| x.real? and not x.integer? }
     end
   end
 end
@@ -44,10 +31,10 @@ end
 class SignFilter < Filter
   def initialize(sign_type)
     case sign_type
-    when :positive then @filter = ->(x){ x > 0 }
-    when :non_positive then @filter = ->(x){ x <= 0 }
-    when :negative then @filter = ->(x){ x < 0 }
-    when :non_negative then @filter = ->(x){ x >= 0 }
+    when :positive     then super() { |x| x > 0 }
+    when :negative     then super() { |x| x < 0 }
+    when :non_positive then super() { |x| x <= 0 }
+    when :non_negative then super() { |x| x >= 0 }
     end
   end
 end
@@ -78,11 +65,7 @@ class NumberSet
     @data.size == 0
   end
 
-  def each
-    if block_given?
-      @data.each { |x| yield x}
-	else
-	  result = @data.to_enum
-	end
+  def each(&block)
+    @data.each(&block)
   end
 end
